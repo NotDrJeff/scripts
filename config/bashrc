@@ -78,7 +78,7 @@ of24x()
 sowfa24x()
 {
     of24x
-    export SOWFA_DIR=$FOAM_INST_DIR/SOWFA
+    export SOWFA_DIR=$FOAM_INST_DIR/SOWFA-2.4.x
     export LD_LIBRARY_PATH=$SOWFA_DIR/lib/$WM_OPTIONS:$LD_LIBRARY_PATH
     export PATH=$SOWFA_DIR/applications/bin/$WM_OPTIONS:$PATH
 }

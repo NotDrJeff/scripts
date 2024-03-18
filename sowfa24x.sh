@@ -19,7 +19,7 @@ cd $FOAM_INST_DIR
 git clone https://github.com/OpenFOAM/ThirdParty-5.x.git
 git clone https://github.com/OpenFOAM/ThirdParty-2.4.x.git
 git clone https://github.com/OpenFOAM/OpenFOAM-2.4.x.git
-git clone https://github.com/NREL/SOWFA.git
+git clone https://github.com/NotDrJeff/SOWFA-2.4.x.git
 cd - > /dev/null
 
 for dir in ThirdParty-5.x ThirdParty-2.4.x OpenFOAM-2.4.x SOWFA; do
