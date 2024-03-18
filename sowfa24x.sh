@@ -30,13 +30,13 @@ done
 
 cd $FOAM_INST_DIR/ThirdParty-2.4.x
 if ! [ -f "CGAL-4.6.3.tar.gz" ]; then
-    wget 'https://github.com/CGAL/cgal/archive/refs/tags/releases/CGAL-4.6.3.tar.gz'
+    wget -nv 'https://github.com/CGAL/cgal/archive/refs/tags/releases/CGAL-4.6.3.tar.gz'
     echo "Extracting archive..."
     tar -xf CGAL-4.6.3.tar.gz
     mv cgal-releases-CGAL-4.6.3 CGAL-4.6
 fi
 if ! [ -a "scotch_6.0.3" ]; then
-    ln -s ../ThirdParty-5.x/scotch_6.0.3 $WM_THIRD_PARTY_DIR/scotch_6.0.3
+    ln -s ../ThirdParty-5.x/scotch_6.0.3 $FOAM_INST_DIR/ThirdParty-2.4.x/scotch_6.0.3
 fi
 cd - > /dev/null
 
