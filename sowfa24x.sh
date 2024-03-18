@@ -74,21 +74,20 @@ export PATH=$SOWFA_DIR/applications/bin/$WM_OPTIONS:$PATH
 
 echo "Cleaning ThirdParty Directory"
 $WM_THIRD_PARTY_DIR/Allclean > $WM_THIRD_PARTY_DIR/log.Allclean.1 2>&1
-echo "Compile ThirdParty Directorty. First Sweep"
+echo "Compile ThirdParty Directorty."
 $WM_THIRD_PARTY_DIR/Allwmake > $WM_THIRD_PARTY_DIR/log.Allwmake.1 2>&1
-echo "Compile ThirdParty Directorty. Second Sweep"
-$WM_THIRD_PARTY_DIR/Allwmake > $WM_THIRD_PARTY_DIR/log.Allwmake.2 2>&1
 
 echo "Cleaning OpenFOAM Directory"
 $WM_PROJECT_DIR/Allclean > $WM_PROJECT_DIR/log.Allclean.1 2>&1
-echo "Compile OpenFOAM Directorty. First Sweep"
+echo "Compile OpenFOAM Directorty."
 $WM_PROJECT_DIR/Allwmake > $WM_PROJECT_DIR/log.Allwmake.1 2>&1
-echo "Compile OpenFOAM Directorty. Second Sweep"
+
+echo "Peforming Second Sweep"
 $WM_PROJECT_DIR/Allwmake > $WM_PROJECT_DIR/log.Allwmake.2 2>&1
 
 cd $SOWFA_DIR
-echo "Compile SOWFA Directorty. First Sweep"
+echo "Compile SOWFA Directorty."
 $SOWFA_DIR/Allwmake > $SOWFA_DIR/log.Allwmake.1 2>&1
-echo "Compile SOWFA Directorty. Second Sweep"
+echo "Performing Second Sweep"
 $SOWFA_DIR/Allwmake > $SOWFA_DIR/log.Allwmake.2 2>&1
 cd - > /dev//null
