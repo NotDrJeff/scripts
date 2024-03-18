@@ -1,0 +1,88 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+# User specific aliases and functions
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/users/40146600/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/users/40146600/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/users/40146600/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/users/40146600/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+SCRATCH="/mnt/scratch2/users/40146600"
+alias scratch="cd $SCRATCH"
+PROJECT="/mnt/autofs/mcclayrds-projects/ad00069"
+alias project="cd $PROJECT"
+
+alias queue="squeue -u 40146600"
+alias report="sacct --format=JobID,JobName,Partition,AllocCPUs,NNodes,ReqMem,State,MaxRSS,MaxVMSize,Elapsed,Submit,Start,End -j"
+
+alias of5="module load apps/openfoam/5.0/gcc-4.8.5+openmpi-3.1.4+boost-1.60.0+cmake-3.5.2+cgal-4.8.0+mgridgen-1.0+qt-5.9.1"
+alias of8="module load apps/openfoam/8/gcc-4.8.5+openmpi-4.0.0+cmake-3.5.2+qt-5.12.10"
+alias gp="module load apps/gnuplot/5.0.2/gcc-4.8.5"
+
+alias mpl="conda activate mpl"
+alias pvserver="rm ./log.pvserver; sbatch ~/scripts/pvserver.sh"
+alias pvbatch="rm ./log.pvbatch; sbatch ~/scripts/pvbatch.sh"
+
+csv()
+{
+    column -s, -t < $1 | less -#2 -N -S
+}
+
+of24x()
+{
+    module load mpi/openmpi/1.10.1/gcc-4.8.5
+    module load apps/cmake/3.5.2/gcc-4.8.5
+
+    if [ -z "$FOAM_INST_DIR" ]; then
+        echo "Nothing to unset..."
+    else
+        echo "Unsetting OpenFOAM environment variables..."
+        . $FOAM_INST_DIR/OpenFOAM-$OPENFOAM_VERSION/etc/config/unset.sh 2>&1 \
+                                                                    > /dev/null
+        export FOAM_INST_DIR=$HOME/OpenFOAM
+    fi
+
+    export FOAM_INST_DIR=$HOME/OpenFOAM
+    export OPENFOAM_VERSION=2.4.x
+    export OPENFOAM_NAME=OpenFOAM-$OPENFOAM_VERSION
+
+    foamDotFile=$FOAM_INST_DIR/$OPENFOAM_NAME/etc/bashrc
+
+    if [ -f $foamDotFile ] ; then
+        echo "Sourcing $foamDotFile..."
+        source $foamDotFile
+    fi
+
+    export WM_NCOMPPROCS=24
+    export WM_COLOURS="white blue green cyan red magenta yellow"
+}
+
+sowfa24x()
+{
+    of24x
+    export SOWFA_DIR=$FOAM_INST_DIR/SOWFA
+    export LD_LIBRARY_PATH=$SOWFA_DIR/lib/$WM_OPTIONS:$LD_LIBRARY_PATH
+    export PATH=$SOWFA_DIR/applications/bin/$WM_OPTIONS:$PATH
+}
+
+
+
+
