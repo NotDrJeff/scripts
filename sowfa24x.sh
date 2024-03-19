@@ -22,9 +22,9 @@ git clone https://github.com/OpenFOAM/OpenFOAM-2.4.x.git
 git clone https://github.com/NotDrJeff/SOWFA-2.4.x.git
 cd - > /dev/null
 
-for dir in ThirdParty-5.x ThirdParty-2.4.x OpenFOAM-2.4.x SOWFA; do
+for dir in ThirdParty-5.x ThirdParty-2.4.x OpenFOAM-2.4.x SOWFA-2.4.x; do
     cd $FOAM_INST_DIR/$dir
-    git clean -f
+    git clean -df
     cd - > /dev/null
 done
 
